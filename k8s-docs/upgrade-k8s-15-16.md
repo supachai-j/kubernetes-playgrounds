@@ -1,3 +1,4 @@
+```
 [root@kubemaster vagrant]# kubectl version
 Client Version: version.Info{Major:"1", Minor:"15", GitVersion:"v1.15.12", GitCommit:"e2a822d9f3c2fdb5c9bfbe64313cf9f657f0a725", GitTreeState:"clean", BuildDate:"2020-05-06T05:17:59Z", GoVersion:"go1.12.17", Compiler:"gc", Platform:"linux/amd64"}
 Server Version: version.Info{Major:"1", Minor:"15", GitVersion:"v1.15.12", GitCommit:"e2a822d9f3c2fdb5c9bfbe64313cf9f657f0a725", GitTreeState:"clean", BuildDate:"2020-05-06T05:09:48Z", GoVersion:"go1.12.17", Compiler:"gc", Platform:"linux/amd64"}
@@ -7,11 +8,11 @@ Server Version: version.Info{Major:"1", Minor:"15", GitVersion:"v1.15.12", GitCo
 NAME         STATUS   ROLES    AGE   VERSION
 kubemaster   Ready    master   71m   v1.15.12
 [root@kubemaster vagrant]#
-
+```
 
 ### Upgrade 1.15.12 to 1.16.15 is NotReady ###
 
-
+```
 yum list --showduplicates kubeadm --disableexcludes=kubernetes
 # find the latest 1.16 version in the list
 # it should look like 1.16.x-0, where x is the latest patch
@@ -229,3 +230,4 @@ Static pod: kube-scheduler-kubemaster hash: 463b02139da48f3e55ac8f355ab95be1
 Warning: kubelet.service changed on disk. Run 'systemctl daemon-reload' to reload units.
 [root@kubemaster vagrant]# systemctl daemon-reload
 [root@kubemaster vagrant]# 
+```

@@ -59,7 +59,6 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 
 
-
 ### Set Up Pod Network with Fannel using Old Document refer:
 
 Delete all the flannel resources using kubectl:
@@ -73,16 +72,15 @@ kubectl delete namespace kube-flannel
 ```
 
 ## How to install Flannel old version for 1.15.x - 1.16.x
-``
+```
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-old-manifests/kube-flannel-legacy.yml
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-old-manifests/kube-flannel-rbac.yml
 kubectl apply -f  https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel-old.yaml
-``
 
 kubectl delete -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-old-manifests/kube-flannel-legacy.yml
 
 https://github.com/flannel-io/flannel/blob/master/Documentation/kubernetes.md
-```
+
 kubectl apply -f https://github.com/coreos/flannel/raw/master/Documentation/kube-flannel.yml
 
  sudo kubectl apply -f https://github.com/flannel-io/flannel/blob/master/Documentation/kube-flannel-old.yaml
@@ -118,14 +116,14 @@ NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
 kubernetes   ClusterIP   10.96.0.1      <none>        443/TCP        56m
 nginx        NodePort    10.96.95.169   <none>        80:30001/TCP   43s
 [root@kubemaster ~]# 
-```
+
 curl 192.168.56.2:30001
 Hello world!
 
 while :; do curl http://192.168.56.201:30001; echo ''; sleep 1; done
-
+```
  
-#### How to upgrade step ####
+### How to Upgrade step ####
 ```
 # yum list --showduplicates kubeadm --disableexcludes=kubernetes
 # sudo yum install -y kubeadm-1.16.15-0 --disableexcludes=kubernetes
@@ -188,7 +186,7 @@ CNI flannel plugin v0.8.6
 ```
 
 
-# Upgrade worker nodes
+## Upgrade worker nodes
 ```
 sudo yum install -y kubeadm-1.16.15-0 --disableexcludes=kubernetes
 sudo kubeadm upgrade node
@@ -199,7 +197,7 @@ kubectl uncordon kworker1.example.com
 kubectl get nodes
 ```
 ===================== Logs Kubernetes Upgrade step ======
-
+```
 [root@kmaster vagrant]# yum install -y kubeadm-1.16.15-0 --disableexcludes=kubernetes
 Loaded plugins: fastestmirror
 Loading mirror speeds from cached hostfile
@@ -382,9 +380,9 @@ kmaster.example.com    Ready    master   29m   v1.15.12
 kworker1.example.com   Ready    <none>   26m   v1.15.12
 [vagrant@kmaster ~]$ 
 
+```
 
-
-# Upgrade worker nodes
+## Upgrade worker nodes
 ```
 sudo yum install -y kubeadm-1.16.15-0 --disableexcludes=kubernetes
 sudo kubeadm upgrade node
@@ -396,6 +394,7 @@ kubectl get nodes
 ```
 
 ## How to master node using pod running 
+```
 [vagrant@kmaster ~]$ kubectl taint node kmaster.example.com node-role.kubernetes.io/master:NoSchedule-
 node/kmaster.example.com untainted
 [vagrant@kmaster ~]$ k get pod 
@@ -552,3 +551,5 @@ NAME                    READY   STATUS    RESTARTS   AGE     IP            NODE 
 nginx-8d4c546f5-4z58m   1/1     Running   0          9m53s   10.244.0.12   kmaster.example.com    <none>           <none>
 nginx-8d4c546f5-zs5cg   1/1     Running   0          11s     10.244.1.5    kworker1.example.com   <none>           <none>
 [vagrant@kmaster ~]$ 
+```
+
