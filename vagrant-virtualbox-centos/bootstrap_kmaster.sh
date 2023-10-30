@@ -20,11 +20,12 @@ su - vagrant -c "kubectl apply -f https://raw.githubusercontent.com/coreos/flann
 su - vagrant -c "kubectl apply -f  https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel-old.yaml " >/dev/null 2>&1
 
 ## Install Flannel package
+echo "[TASK 4] Install CNI Flannel Packages"
 sudo yum install wget -y  >/dev/null 2>&1
 wget https://github.com/containernetworking/plugins/releases/download/v0.8.6/cni-plugins-linux-amd64-v0.8.6.tgz >/dev/null 2>&1
 tar -zxvf cni-plugins-linux-amd64-v0.8.6.tgz >/dev/null 2>&1
 sudo cp flannel /opt/cni/bin/ >/dev/null 2>&1
 
 # Generate Cluster join command
-echo "[TASK 4] Generate and save cluster join command to /joincluster.sh"
+echo "[TASK 5] Generate and save cluster join command to /joincluster.sh"
 kubeadm token create --print-join-command > /joincluster.sh
