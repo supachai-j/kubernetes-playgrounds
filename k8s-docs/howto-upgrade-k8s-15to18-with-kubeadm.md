@@ -1,12 +1,20 @@
-# How To Upgrade k8s 15 to 18 on CentOS7
+# How To Upgrade Kubernetes 1.15.x to 1.18.x on CentOS7
 
 This page explains how to upgrade a Kubernetes cluster created with kubeadm from version 1.15.x to version 1.16.x, and from version 1.16.x to 1.18.y
 
-### The upgrade workflow at high level is the following:
+### The Upgrade Workflow at high level is the following:
 
 - Upgrade the primary control plane node.
 - Upgrade additional control plane nodes.
 - Upgrade worker nodes.
+
+### Mock POC Kubenetes Setup Labs
+- Master Node x 1 node.cxf 
+- Worker Node x 1 node.
+- OS CentOS 7 64bits (Kernel: 3.10.0-1127.el7.x86_64)
+- Kubenetes v1.15.12
+- Docker version => 18.09.7
+- CNI flannel plugin v0.8.6 (flannel:v0.11.0-amd64)
 
 
 ### The Setup
