@@ -90,6 +90,8 @@ kubectl apply -f https://github.com/coreos/flannel/raw/master/Documentation/kube
   Warning  FailedScheduling        9m12s (x154 over 34m)  default-scheduler    0/1 nodes are available: 1 node(s) had taints that the pod didn't tolerate.
   Warning  FailedCreatePodSandBox  6m31s                  kubelet, kubemaster  Failed create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "c47b8f94181f6c86509a01e194e51e2e37c9e3bd450cee95f6165b9c898d00e6" network for pod "coredns-5d4dd4b4db-6nbgp": NetworkPlugin cni failed to set up pod "coredns-5d4dd4b4db-6nbgp_kube-system" network: failed to find plugin "flannel" in path [/opt/cni/bin], failed to clean up sandbox container "c47b8f94181f6c86509a01e194e51e2e37c9e3bd450cee95f6165b9c898d00e6" network for pod "coredns-5d4dd4b4db-6nbgp": NetworkPlugin cni failed to teardown pod "coredns-5d4dd4b4db-6nbgp_kube-system" network: failed to find plugin "flannel" in path [/opt/cni/bin]]
   Normal   SandboxChanged          72s (x25 over 6m30s)   kubelet, kubemaster  Pod sandbox changed, it will be killed and re-created.
+
+  
 ```
 ### Solution: 
 ```
