@@ -9,7 +9,7 @@ This page explains how to upgrade a Kubernetes cluster created with kubeadm from
 - Upgrade worker nodes.
 
 ### Mock POC Kubenetes Setup Labs
-- Master Node x 1 node.cxf 
+- Master Node x 1 node.
 - Worker Node x 1 node.
 - OS CentOS 7 64bits (Kernel: 3.10.0-1127.el7.x86_64)
 - Kubenetes v1.15.12
@@ -46,7 +46,7 @@ kubeadm version: &version.Info{Major:"1", Minor:"15", GitVersion:"v1.15.12", Git
 [vagrant@kworker1 ~]$ 
 ```
 
-## Error message "[ERROR CoreDNSUnsupportedPlugins]: there are unsupported plugins in the CoreDNS Corefile"
+### 1. Error message "[ERROR CoreDNSUnsupportedPlugins]: there are unsupported plugins in the CoreDNS Corefile"
 ```
 $ kubeadm upgrade plan
 [upgrade/config] Making sure the configuration is correct:
@@ -109,6 +109,31 @@ data:
         reload
         loadbalance
     }
+```
+
+### 2. Error message from CoreDNS Pending can't run :
+```
+$ kubectl describe -n kube-system pod coredns-5d4dd4b4db-6nbgp 
+.....
+  Warning  FailedScheduling        9m12s (x154 over 34m)  default-scheduler    0/1 nodes are available: 1 node(s) had taints that the pod didn't tolerate.
+  Warning  FailedCreatePodSandBox  6m31s                  kubelet, kubemaster  Failed create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "c47b8f94181f6c86509a01e194e51e2e37c9e3bd450cee95f6165b9c898d00e6" network for pod "coredns-5d4dd4b4db-6nbgp": NetworkPlugin cni failed to set up pod "coredns-5d4dd4b4db-6nbgp_kube-system" network: failed to find plugin "flannel" in path [/opt/cni/bin], failed to clean up sandbox container "c47b8f94181f6c86509a01e194e51e2e37c9e3bd450cee95f6165b9c898d00e6" network for pod "coredns-5d4dd4b4db-6nbgp": NetworkPlugin cni failed to teardown pod "coredns-5d4dd4b4db-6nbgp_kube-system" network: failed to find plugin "flannel" in path [/opt/cni/bin]]
+  Normal   SandboxChanged          72s (x25 over 6m30s)   kubelet, kubemaster  Pod sandbox changed, it will be killed and re-created.
+......
+```
+#### How to Fixed Issue CoreDNS Pending can't run : 
+```
+#https://github.com/containernetworking/plugins/releases/tag/v0.8.6
+
+$ sudo yum install wget -y
+$ wget https://github.com/containernetworking/plugins/releases/download/v0.8.6/cni-plugins-linux-amd64-v0.8.6.tgz
+$ cd ~
+$ tar -zxvf cni-plugins-linux-amd64-v0.8.6.tgz
+$ sudo cp flannel /opt/cni/bin/
+$ /opt/cni/bin/flannel --version
+CNI flannel plugin v0.8.6
+$
+$ kubectl get pod -A
+$
 ```
 
 ## Upgrade v1.15.x-v.1.16.x
