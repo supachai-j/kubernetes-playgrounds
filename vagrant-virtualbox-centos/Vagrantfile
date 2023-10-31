@@ -7,7 +7,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", path: "bootstrap.sh"
   # Fixed bugs Warning: Remote connection disconnect. retrying
-  config.ssh.insert_key = false
+  # config.ssh.insert_key = false
   # Kubernetes Master Server
   config.vm.define "kmaster" do |kmaster|
     kmaster.vm.box = "centos/7"
