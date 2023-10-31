@@ -1,6 +1,7 @@
 # vagrant temp
 .vagrant
 
+
 # General
 .DS_Store
 .AppleDouble
