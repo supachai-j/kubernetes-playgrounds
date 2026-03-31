@@ -20,12 +20,12 @@ choco install vitualbox -y
 
 Installation vagrant
 ```
-brew cask install vagrant 
+brew install vagrant 
 ```
 
 Installation virtualbox
 ```
-brew cask install vitualbox
+brew install --cask virtualbox
 ```
 
 ### Check vagrant version
